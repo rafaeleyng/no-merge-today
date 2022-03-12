@@ -1,5 +1,7 @@
 # no-merge-today
 
+This is a PR just to test the merge button.
+
 A [Chrome extension](https://chrome.google.com/webstore/detail/no-merge-today/iikbekjkpkkbfbaalmdaidjaenjjmlpd) to block the Github merge button on specific days.
 
 ![screenshot](screenshot.png)
