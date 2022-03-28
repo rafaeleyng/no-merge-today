@@ -1,4 +1,10 @@
+'use strict'
+
 chrome.runtime.onInstalled.addListener(() => {
-  const days = [true, true, true, true, true, true, true]
-  chrome.storage.sync.set({ days })
+  chrome.storage.sync.get('days', ({ days }) => {
+    if (!days) {
+      const defaultDays = [true, true, true, true, true, false, true]
+      chrome.storage.sync.set({ days: defaultDays })
+    }
+  })
 })

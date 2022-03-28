@@ -1,3 +1,5 @@
+'use strict'
+
 const buttons = document.querySelectorAll('.day')
 
 const setButtonsListeners = () => buttons.forEach((button) => button.addEventListener('click', handleButtonClick))

@@ -13,5 +13,15 @@
   },
   "background": {
     "service_worker": "src/background.js"
-  }
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/*/pull/*"
+      ],
+      "js": [
+        "src/content-script.js"
+      ]
+    }
+  ]
 }
