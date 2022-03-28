@@ -1,0 +1,15 @@
+body {
+  width: 100px
+}
+
+.day {
+  height: 30px;
+  outline: none;
+  margin: 10px;
+  border: none;
+  border-radius: 2px;
+}
+
+.day.active {
+  background-color: green;
+}
