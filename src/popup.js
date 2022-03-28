@@ -12,6 +12,13 @@ const handleButtonClick = ({ target: button }) => {
     days[day] = !days[day]
     chrome.storage.sync.set({ days }, () => {
       setButtonsStyle(days)
+
+      // notify all tabs
+      chrome.tabs.query({}, (tabs) => {
+        for (let tab of tabs) {
+          chrome.tabs.sendMessage(tab.id, {})
+        }
+      })
     })
   })
 }
