@@ -1,0 +1,30 @@
+{
+  "name": "No Merge Today",
+  "description": "Block the merge button on specific days",
+  "version": "1.0",
+  "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "storage",
+    "scripting",
+    "webNavigation"
+  ],
+  "action": {
+    "default_popup": "src/popup.html"
+  },
+  "background": {
+    "service_worker": "src/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "run_at": "document_end",
+      "matches": [
+        "https://github.com/*"
+      ],
+      "js": [
+        "src/content-script.js"
+      ]
+    }
+  ]
+}
