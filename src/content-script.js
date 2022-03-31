@@ -21,6 +21,12 @@ const setMergeButtonStatus = (canMerge) => {
     return
   }
 
+  const mergeConflict = document.querySelectorAll('.branch-action-item .completeness-indicator-problem')
+  if (mergeConflict.length > 0) {
+    // Don't change PRs with merge conflicts.
+    return
+  }
+
   const disabled = !canMerge
   const buttonsMerge = getButtonsMerge()
 
