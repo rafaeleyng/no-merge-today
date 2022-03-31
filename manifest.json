@@ -4,20 +4,23 @@
   "version": "1.0",
   "manifest_version": 3,
   "permissions": [
-    "storage",
     "activeTab",
-    "scripting"
+    "tabs",
+    "storage",
+    "scripting",
+    "webNavigation"
   ],
   "action": {
     "default_popup": "src/popup.html"
   },
   "background": {
-    "service_worker": "src/background.js"
+    "service_worker": "src/service-worker.js"
   },
   "content_scripts": [
     {
+      "run_at": "document_end",
       "matches": [
-        "https://github.com/*/*/pull/*"
+        "https://github.com/*"
       ],
       "js": [
         "src/content-script.js"
