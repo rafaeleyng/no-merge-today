@@ -3,7 +3,7 @@
 const githubUrlPattern = 'https://github.com/*'
 const navigationFilter = { urlMatches: githubUrlPattern }
 
-const throttleInterval = 800 // this value was found empirically
+const throttleInterval = 500 // this value was found empirically
 let lastEventTimestamp = null
 
 const main = () => {
@@ -12,6 +12,7 @@ const main = () => {
   chrome.runtime.onInstalled.addListener(() => {
     chrome.storage.sync.get('days', ({ days }) => {
       if (!days) {
+        // Defaults to allowing everyday but Fridays. Week starts on Sunday.
         const defaultDays = [true, true, true, true, true, false, true]
         chrome.storage.sync.set({ days: defaultDays })
       }
