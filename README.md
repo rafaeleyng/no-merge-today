@@ -2,6 +2,8 @@
 
 A Chrome extension to block the Github merge button on specific days.
 
+This is a PR just to test the merge button.
+
 ## scenarios
 
 - [X] navigating directly to a PR link (full page load)
