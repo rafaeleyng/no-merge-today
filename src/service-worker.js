@@ -6,6 +6,49 @@ const navigationFilter = { urlMatches: githubUrlPattern }
 const throttleInterval = 500 // this value was found empirically
 let lastEventTimestamp = null
 
+const setIcon = (canMerge) => {
+  if (canMerge) {
+    chrome.action.setIcon({
+      path: {
+        16: chrome.runtime.getURL('./icons/icon16.png'),
+        32: chrome.runtime.getURL('./icons/icon32.png'),
+        48: chrome.runtime.getURL('./icons/icon48.png'),
+        128: chrome.runtime.getURL('./icons/icon128.png'),
+      }
+    })
+  } else {
+    chrome.action.setIcon({
+      path: {
+        16: chrome.runtime.getURL('./icons/icon-disabled16.png'),
+        32: chrome.runtime.getURL('./icons/icon-disabled32.png'),
+        48: chrome.runtime.getURL('./icons/icon-disabled48.png'),
+        128: chrome.runtime.getURL('./icons/icon-disabled128.png'),
+      }
+    })
+  }
+}
+
+const checkIconForToday = () => {
+  chrome.storage.sync.get('days', ({ days }) => {
+    const day = new Date().getDay()
+    const canMerge = days[day]
+    setIcon(canMerge)
+  })
+}
+
+const handleMessages = (request, sender, sendResponse) => {
+  const { type, data } = request
+
+  switch (type) {
+    case 'action-toggle':
+      checkIconForToday()
+      break;
+  }
+
+  // Send empty response just to avoid errors in the console. We don't actually have anything to reply.
+  sendResponse()
+}
+
 const main = () => {
   // Set the default configuration when installing the extension.
   // For updates, the existing days will be preserved.
@@ -37,6 +80,10 @@ const main = () => {
       }
     })
   }, navigationFilter)
+
+  // Check the action icon once and then setup the listener for subsequent changes
+  checkIconForToday()
+  chrome.runtime.onMessage.addListener(handleMessages)
 }
 
 main()

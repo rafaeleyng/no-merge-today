@@ -13,10 +13,15 @@ const handleButtonClick = ({ target: button }) => {
     chrome.storage.sync.set({ days }, () => {
       setButtonsStyle(days)
 
+      const message = { type: 'action-toggle' }
+
       // Notify tabs that are on a PR page so they can trigger the check.
       chrome.tabs.query({ url: 'https://github.com/*/*/pull/*' }, (tabs) => {
-        tabs.forEach((tab) => chrome.tabs.sendMessage(tab.id, { type: 'action-toggle' }))
+        tabs.forEach((tab) => chrome.tabs.sendMessage(tab.id, message))
       })
+
+      // Notify other interested parts that are not tabs.
+      chrome.runtime.sendMessage(message)
     })
   })
 }

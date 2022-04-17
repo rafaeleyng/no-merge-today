@@ -17,5 +17,5 @@ This extension declares 3 permissions in its manifest.json
 - [X] work when navigating from anywhere inside Github to the PR link (possibly a client-side render without full reload);
 - [X] work when changing the config on the action popup;
 - [X] work observing changes to the DOM that can be caused by changing the state of a PR;
-- [ ] detect end of current day/begin of new day;
-- [ ] show action icon with different colors (green/gray) according to the configuration for the current day;
+- [X] show action icon with different colors (green/gray) according to the configuration for the current day;
+- [ ] detect end of current day/begin of new day, set PR button and extension icon accordingly;
