@@ -1,6 +1,6 @@
 # no-merge-today
 
-A Chrome extension to block the Github merge button on specific days.
+A [Chrome extension](https://chrome.google.com/webstore/detail/no-merge-today/iikbekjkpkkbfbaalmdaidjaenjjmlpd) to block the Github merge button on specific days.
 
 ![screenshot](screenshot.png)
 
