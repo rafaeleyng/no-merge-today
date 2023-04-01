@@ -81,6 +81,17 @@ const main = () => {
     })
   }, navigationFilter)
 
+  // After PR page has loaded, GitHub will make a request to check the merge status.
+  // We listen for that request and notify the content script on the PR page, so it can trigger the check.
+  chrome.webRequest.onCompleted.addListener((details) => {
+    chrome.tabs.sendMessage(details.tabId, { type: 'after-check-merge-status', data: details });
+  }, {
+    urls: [
+      // We only listen for the request to check the merge status.
+      `${githubUrlPattern}/*/pull/*/partials/merging`
+    ]
+  });
+
   // Check the action icon once and then setup the listener for subsequent changes
   checkIconForToday()
   chrome.runtime.onMessage.addListener(handleMessages)

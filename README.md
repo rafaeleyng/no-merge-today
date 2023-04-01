@@ -6,10 +6,11 @@ A [Chrome extension](https://chrome.google.com/webstore/detail/no-merge-today/ii
 
 ## permissions
 
-This extension declares 3 permissions in its manifest.json
+This extension declares 4 permissions in its manifest.json
 - `tabs`: is needed so if multiple tabs are open in Github pull request pages, all tabs can be notified of configuration changes in the action popup (like toggling merge on any day on/off);
 - `storage`: is needed to store the configuration of in which days the merge buttons should be blocked. It is also used to sync this config to your profile (if you login in with your profile in another Chrome instance, it should retrieve the same config);
 - `webNavigation`: is needed to correctly trigger the check for the buttons when doing a client-side navigation, without a full page reload, such as what happens when you are in `/pulls` inside some repository and clicks on any PR. If, instead, you navigate directly to the PR URL, a full page reload happens, but this permission is still needed for the other cases.
+- `webRequest`: is needed to register a listener for the merge status check request after the PR page is loaded, and to update the button status if needed.
 
 ## TODO
 

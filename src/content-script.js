@@ -93,7 +93,7 @@ const mutationObserver = new MutationObserver(() => {
 const startMutationObserver = () => mutationObserver.observe(container, { childList: true, subtree: true })
 const stopMutationObserver = () => mutationObserver.disconnect()
 
-const handleNavigation = (data) => {
+const handleButtonCheckListener = (data) => {
   // Reset, regardless we are going in or out of a PR page.
   originalState = null
   didToggleCanMerge = false
@@ -112,8 +112,9 @@ const handleMessages = (request, sender, sendResponse) => {
   const { type, data } = request
 
   switch (type) {
+    case 'after-check-merge-status':
     case 'navigation':
-      handleNavigation(data)
+      handleButtonCheckListener(data)
       break;
     case 'action-toggle':
       checkButtonForToday()
